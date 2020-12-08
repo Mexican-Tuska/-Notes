@@ -23,37 +23,35 @@ namespace Notes
         {
             InitializeComponent();
         }
-        public CreationWindow(string title)
+        public CreationWindow(string title, ref FileStream fs)
         {
             InitializeComponent();
-            this.set_view(title);
+            this.set_view(title, ref fs);
         }
         public event EventHandler CreationWindowClosed;
         private void CreationWIndow_Closed(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //SaveFileDialog dlg = new SaveFileDialog();
-            //dlg.Filter = "Rich Text Format (*.rtf)|*.rtf|All files (*.*)|*.*";
-            //if (dlg.ShowDialog() == true)
-            //{
+            
             string title = Note_Title.Text.ToString();
             string cur_dir = Directory.GetCurrentDirectory();
-                FileStream fileStream = new FileStream($"{title}.rtf", FileMode.Create);
+                FileStream fileStream = new FileStream($"{title}.rtf", FileMode.CreateNew);
                 TextRange range = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
                 range.Save(fileStream, DataFormats.Rtf);
           
                 CreationWindowClosed(this, EventArgs.Empty);
-            //}
+           
         }
 
         public string get_title()
         {
             return Note_Title.Text.ToString();
         }
-      public void set_view(string title)
-        {   FileStream note_file = File.Open($"{title}.rtf", FileMode.Open);
-            Note_Title.Text = title;
-           TextRange doc = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
-           doc.Load(note_file, DataFormats.Rtf);
+      public void set_view(string title, ref FileStream  fs)
+        {    Note_Title.Text = title;
+              TextRange doc = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
+                
+            doc.Load(fs, DataFormats.Rtf);
+          
         }
     }
 }

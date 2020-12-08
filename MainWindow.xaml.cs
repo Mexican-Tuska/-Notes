@@ -47,10 +47,11 @@ namespace Notes
         {
             int index = NotesList.SelectedIndex;
             string tit = (string) NotesList.Items[index];
-            CreationWindow s_window = new CreationWindow(tit);
+            FileStream note_file = File.Open(tit + ".rtf", FileMode.Open);
+
+            CreationWindow s_window = new CreationWindow(tit, ref note_file);
             s_window.Owner = this;
-            
-            // s_window.set_view(tit);
+          
             s_window.Show();
         }
     }
