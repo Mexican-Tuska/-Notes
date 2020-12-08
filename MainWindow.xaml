@@ -1,0 +1,18 @@
+﻿<Window x:Class="Notes.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Notes"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <TextBlock Name="Title" Text="ЗАПИСКИ" TextWrapping="Wrap" Margin="320,10,410,392"/>
+        <Button Name ="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="274,63,0,0" VerticalAlignment="Top" Height="63" Width="161" Click="CreateButton_Click"/>
+        <TextBox Name="SearchField" Text="Поиск" TextWrapping="Wrap" Margin="274,147,410,239"/>
+        <Button Name="SearchButton" Content="Поиск" HorizontalAlignment="Left" Margin="400,147,0,0" VerticalAlignment="Top" Height="48" Width="72"/>
+        <ListBox Name ="NotesList" Margin="201,217,257,10" MouseDoubleClick="NotesList_ItemDoubleClick"/>
+
+
+    </Grid>
+</Window>
