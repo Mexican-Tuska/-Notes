@@ -19,7 +19,7 @@ namespace Notes
     /// </summary>
     public partial class CreationWindow : Window
     {
-        private bool isChanged;
+        private bool isChanged = false;
         public CreationWindow()
         {
             InitializeComponent();
@@ -55,7 +55,8 @@ namespace Notes
             }
             catch (IOException)
             {
-               
+
+             //  if (this.isChanged())
             }
           
                 CreationWindowClosed(this, EventArgs.Empty);
