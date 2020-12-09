@@ -19,10 +19,22 @@ namespace Notes
     /// </summary>
     public partial class CreationWindow : Window
     {
+        private bool isChanged;
         public CreationWindow()
         {
             InitializeComponent();
+            NoteEditor.TextChanged += NoteEditor_TextChanged;
         }
+
+        private void NoteEditor_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            isChanged = true;
+        }
+        public bool isChanged_f()
+        {
+            return isChanged;
+        }
+
         public CreationWindow(string title, ref FileStream fs)
         {
             InitializeComponent();
@@ -34,9 +46,17 @@ namespace Notes
             
             string title = Note_Title.Text.ToString();
             string cur_dir = Directory.GetCurrentDirectory();
+
+            try
+            {
                 FileStream fileStream = new FileStream($"{title}.rtf", FileMode.CreateNew);
                 TextRange range = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
                 range.Save(fileStream, DataFormats.Rtf);
+            }
+            catch (IOException)
+            {
+               
+            }
           
                 CreationWindowClosed(this, EventArgs.Empty);
            
