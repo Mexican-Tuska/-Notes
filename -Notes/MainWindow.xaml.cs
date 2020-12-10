@@ -29,17 +29,17 @@ namespace Notes
         public string note_title;
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            CreationWindow creationWindow = new CreationWindow();
-            creationWindow.Owner = this;
-            creationWindow.CreationWindowClosed += CreationWindowClosed_React;
+            CreationWindow creationWindow = new CreationWindow(); /*Создали окошко*/
+            creationWindow.Owner = this; /*Сделали окошко дочерним*/
+            creationWindow.CreationWindowClosed += CreationWindowClosed_React; /*Позволяет отслеживать закрытие окна*/
             creationWindow.Show();
-                   
+
         }
 
-        private void CreationWindowClosed_React(object sender, EventArgs e)
+        private void CreationWindowClosed_React(object sender, EventArgs e) /*После закрытия окошка создания записки*/
         {
-            if (!NotesList.Items.Contains(((CreationWindow)sender).get_title()))
-            { NotesList.Items.Add(((CreationWindow)sender).get_title()); }
+            if (!NotesList.Items.Contains(((CreationWindow)sender).get_title())) /*получили заголовок*/
+            { NotesList.Items.Add(((CreationWindow)sender).get_title()); } /*И добавили его в листбокс, если такие данные уже содержаться, то мы ничего не делаем*/
             else
             {
                 
@@ -49,7 +49,7 @@ namespace Notes
 
         private void NotesList_ItemDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            int index = NotesList.SelectedIndex;
+            int index = NotesList.SelectedIndex; 
             string tit = (string) NotesList.Items[index];
             FileStream note_file = File.Open(tit + ".rtf", FileMode.Open);
 
@@ -59,17 +59,12 @@ namespace Notes
             s_window.Show();
         }
 
-        private void button1_MouseDown(object sender, MouseEventArgs e)
+        private void DelButton_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
-
-        private void NotesList_MouseDown(object sender, MouseEventArgs e)
-        {
-            if (e.RightButton == MouseButtonState.Pressed)
-            {
-                MessageBox.Show("WORKS");
-            }
+            int index = NotesList.SelectedIndex;
+            string tit = (string)NotesList.Items[index];
+            NotesList.Items.RemoveAt(index);
+            File.Delete(tit + ".rtf");
         }
     }
 }

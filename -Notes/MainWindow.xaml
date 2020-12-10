@@ -11,8 +11,12 @@
         <Button Name ="CreateButton" Content="Создать" HorizontalAlignment="Left" Margin="274,63,0,0" VerticalAlignment="Top" Height="63" Width="161" Click="CreateButton_Click"/>
         <TextBox Name="SearchField" Text="Поиск" TextWrapping="Wrap" Margin="274,147,410,239"/>
         <Button Name="SearchButton" Content="Поиск" HorizontalAlignment="Left" Margin="400,147,0,0" VerticalAlignment="Top" Height="48" Width="72"/>
-        <ListBox Name ="NotesList" Margin="201,217,257,10" MouseDoubleClick="NotesList_ItemDoubleClick" MouseDown="NotesList_MouseDown"/>
-
-
+        <ListBox Name ="NotesList" Margin="201,217,257,10" MouseDoubleClick="NotesList_ItemDoubleClick">
+            <ListBox.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Удалить" Click="DelButton_Click"></MenuItem>
+                </ContextMenu>
+            </ListBox.ContextMenu>
+        </ListBox>
     </Grid>
 </Window>
