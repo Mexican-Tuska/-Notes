@@ -20,11 +20,10 @@ namespace Notes
     /// </summary>
     public partial class MainWindow : Window
     {
-        public List<string> notes_titles;
         public MainWindow()
         {
             InitializeComponent();
-            notes_titles = new List<string> ();
+            
 
         }
         public string note_title;
@@ -39,7 +38,12 @@ namespace Notes
 
         private void CreationWindowClosed_React(object sender, EventArgs e)
         {
-            NotesList.Items.Add(((CreationWindow)sender).get_title());
+            if (!NotesList.Items.Contains(((CreationWindow)sender).get_title()))
+            { NotesList.Items.Add(((CreationWindow)sender).get_title()); }
+            else
+            {
+                
+            }
            
         }
 
@@ -51,8 +55,21 @@ namespace Notes
 
             CreationWindow s_window = new CreationWindow(tit, ref note_file);
             s_window.Owner = this;
-          
+            s_window.CreationWindowClosed += CreationWindowClosed_React;
             s_window.Show();
+        }
+
+        private void button1_MouseDown(object sender, MouseEventArgs e)
+        {
+            
+        }
+
+        private void NotesList_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (e.RightButton == MouseButtonState.Pressed)
+            {
+                MessageBox.Show("WORKS");
+            }
         }
     }
 }
