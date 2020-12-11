@@ -12,6 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Drawing;
+//using System.Windows.Forms;
+//using DataFormats = System.Windows.DataFormats;
 
 namespace Notes
 {
@@ -46,22 +49,22 @@ namespace Notes
             isChanged = false;
             NoteEditor.TextChanged += NoteEditor_TextChanged;
         }
-       
+
         public event EventHandler CreationWindowClosed; /*Сигнал события, который реагирует на событие в окошке и в xaml свойство closing запускает*/
-       
+
         private void CreationWIndow_Closed(object sender, System.ComponentModel.CancelEventArgs e) /*Функция, которая реагирует на закрытие окна*/
         {
             //string title;
             if (!Note_Title.Text.Equals("")) { title = Note_Title.Text; } /*Рассматривает случай, если поле заголовка не пустое, то переменные строке заголовка присваеваем данные, которые есть в этом поле*/
             else
             {
-              //  Считываю файлы текстового поля и присваиваются в заголовок
+                //  Считываю файлы текстового поля и присваиваются в заголовок
                 TextRange tmp = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd); /*читаем данные textRange. tmp впитывает все, что было в текстовом поле*/
-                title = new string (tmp.Text.Where(c => !char.IsControl(c)).ToArray()); /*Заголовку выделяется память с помощью запроса, ему присваевается значения текста, которое есть в доке*/
+                title = new string(tmp.Text.Where(c => !char.IsControl(c)).ToArray()); /*Заголовку выделяется память с помощью запроса, ему присваевается значения текста, которое есть в доке*/
             }
             string cur_dir = Directory.GetCurrentDirectory(); /*Строковая переменная получает строковую директория*/
 
-            if (this.isChanged_f() && File.Exists(cur_dir+"\\"+title+".rtf")) /*Случай. Если текст был изменен, но файл уже существует с таким названием*/
+            if (this.isChanged_f() && File.Exists(cur_dir + "\\" + title + ".rtf")) /*Случай. Если текст был изменен, но файл уже существует с таким названием*/
             {
                 /*Был ли существующий файл отредактирован*/
 
@@ -77,32 +80,48 @@ namespace Notes
                 FileStream fs = new FileStream($"{title}.rtf", FileMode.CreateNew);
                 TextRange range = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
                 range.Save(fs, DataFormats.Rtf);
-              
+
             }
-          else if (File.Exists(cur_dir + "\\" + title + ".rtf")) /*Если файл изменен не был, но мы его посмотрели*/
+            else if (File.Exists(cur_dir + "\\" + title + ".rtf")) /*Если файл изменен не был, но мы его посмотрели*/
             {
-                /*То же самое, что и впервом случае*/
-                File.Delete(cur_dir + "\\" + title + ".rtf");
-                FileStream fs = new FileStream($"{title}.rtf", FileMode.CreateNew);
-                TextRange range = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
-                range.Save(fs, DataFormats.Rtf);
+
             }
-           
-           CreationWindowClosed(this, EventArgs.Empty); /*Выпускается сигнал, что окошко закрылось*/
+
+            CreationWindowClosed(this, EventArgs.Empty); /*Выпускается сигнал, что окошко закрылось*/
 
         }
+
+
 
         //Когда открываем уже существующую записку то ее заголовок и данные передаются в эту самую формочку
         public string get_title() /*Просто возвращает значение заголовка*/
         {
             return title;
         }
-        
-      public void set_view(string title, ref FileStream  fs) /*Тот самый сет, с помощью которого устанавливается значение*/
-        {    Note_Title.Text = title; /*Присваевается заголовок полю заголовка*/
-            TextRange doc = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
-             doc.Load(fs, DataFormats.Rtf); /*Присваевается содержимое файла*/
 
+        public void set_view(string title, ref FileStream fs) /*Тот самый сет, с помощью которого устанавливается значение*/
+        {
+            Note_Title.Text = title; /*Присваевается заголовок полю заголовка*/
+            TextRange doc = new TextRange(NoteEditor.Document.ContentStart, NoteEditor.Document.ContentEnd);
+            doc.Load(fs, DataFormats.Rtf); /*Присваевается содержимое файла*/
+
+        }
+
+        private void Bold_Button_Click(object sender, RoutedEventArgs e)
+        {
+            EditingCommands.ToggleBold.Execute(null, NoteEditor);
+        }
+
+        private void Underlined_Click(object sender, RoutedEventArgs e)
+        {
+            EditingCommands.ToggleUnderline.Execute(null, NoteEditor);
+        }
+
+        private void Italic_Click(object sender, RoutedEventArgs e)
+        {
+            EditingCommands.ToggleItalic.Execute(null, NoteEditor);
         }
     }
 }
+
+       
