@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 namespace Notes
 {
     /// <summary>
@@ -20,11 +21,11 @@ namespace Notes
     /// </summary>
     public partial class MainWindow : Window
     {
+        string language;
         public MainWindow()
         {
             InitializeComponent();
-            
-
+            language = "rus-RU";
         }
         public string note_title;
         private void CreateButton_Click(object sender, RoutedEventArgs e)
@@ -44,7 +45,6 @@ namespace Notes
             {
                 
             }
-           
         }
 
         private void NotesList_ItemDoubleClick(object sender, MouseButtonEventArgs e)
@@ -65,6 +65,23 @@ namespace Notes
             string tit = (string)NotesList.Items[index];
             NotesList.Items.RemoveAt(index);
             File.Delete(tit + ".rtf");
+        }
+
+        private void Lang_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+            language = (cb.SelectedItem as ComboBoxItem).Tag.ToString();
+
+            if (language != null)
+            {
+                CultureInfo lang = new CultureInfo(language);
+
+                if (lang != null)
+                {
+                    App.Language = lang;
+                }
+
+            }
         }
     }
 }

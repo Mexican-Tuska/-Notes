@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:v="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:Notes">
+
+    <v:String x:Key="r_English">English</v:String>
+    <v:String x:Key="r_Russian">Русский</v:String>
+    <v:String x:Key="r_Espanol">Español</v:String>
+    <v:String x:Key="r_France">France</v:String>
+
+    <v:String x:Key="main_Title">Nota</v:String>
+    <v:String x:Key="main_Add">Agrega una nota</v:String>
+    <v:String x:Key="main_List">Lista de notas</v:String>
+    <v:String x:Key="main_Del">Eliminar</v:String>
+
+</ResourceDictionary>
