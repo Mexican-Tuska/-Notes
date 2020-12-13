@@ -7,12 +7,12 @@
         mc:Ignorable="d"
         Title="{DynamicResource main_Title}" Height="750" Width="420" WindowStartupLocation="CenterScreen">
     <Window.Background>
-        <ImageBrush ImageSource="/ruled_sheet.jpg" />
+        <ImageBrush ImageSource="C:\Users\pc\source\repos\-Notes\-Notes\picture\ruled_sheet.jpg"/>
     </Window.Background>
     <Grid>
         <Button Name ="CreateButton" Content="{DynamicResource main_Add}" HorizontalAlignment="Center" Margin="0,90,0,0" VerticalAlignment="Top" FontSize="20" FontFamily="Segoe Print" Height="63" FontWeight="Bold" Cursor="Hand" BorderBrush="Black" UseLayoutRounding="False" Click="CreateButton_Click">
             <Button.Background>
-                <ImageBrush ImageSource="/stol.jpg" Stretch="UniformToFill"/>
+                <ImageBrush ImageSource="C:\Users\pc\source\repos\-Notes\-Notes\picture\stol.jpg" Stretch="UniformToFill"/>
             </Button.Background>
         </Button>
         <ListBox Name ="NotesList"  Margin="18,237,18,37" MouseDoubleClick="NotesList_ItemDoubleClick" Background="{x:Null}">
