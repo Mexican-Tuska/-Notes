@@ -14,6 +14,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Globalization;
+using NotesClass;
+
 namespace Notes
 {
     /// <summary>
@@ -26,24 +28,31 @@ namespace Notes
         {
             InitializeComponent();
             language = "rus-RU";
+             notes = new NotesClass.NotesClass();
+            List<string> titles = notes.get_titles();
+            foreach (string t in titles)
+            {
+                NotesList.Items.Add(t);
+            }
+
         }
-        public string note_title;
+    
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
-            CreationWindow creationWindow = new CreationWindow(); /*Создали окошко*/
-            creationWindow.Owner = this; /*Сделали окошко дочерним*/
-            creationWindow.CreationWindowClosed += CreationWindowClosed_React; /*Позволяет отслеживать закрытие окна*/
+            CreationWindow creationWindow = new CreationWindow(ref notes); /*Создали окошко*/
+            creationWindow.Owner = this; 
+            creationWindow.CreationWindowClosed += CreationWindowClosed_React; 
             creationWindow.Show();
-
         }
 
         private void CreationWindowClosed_React(object sender, EventArgs e) /*После закрытия окошка создания записки*/
         {
-            if (!NotesList.Items.Contains(((CreationWindow)sender).get_title())) /*получили заголовок*/
-            { NotesList.Items.Add(((CreationWindow)sender).get_title()); } /*И добавили его в листбокс, если такие данные уже содержаться, то мы ничего не делаем*/
+           if (!NotesList.Items.Contains(((CreationWindow)sender).get_title())) /*получили заголовок*/
+            { NotesList.Items.Add(((CreationWindow)sender).get_title());
+                notes = ((CreationWindow)sender).get_tmp();  } /*И добавили его в листбокс, если такие данные уже содержаться, то мы ничего не делаем*/
             else
             {
-                
+                notes = ((CreationWindow)sender).get_tmp();
             }
         }
 
@@ -51,12 +60,12 @@ namespace Notes
         {
             int index = NotesList.SelectedIndex; 
             string tit = (string) NotesList.Items[index];
-            FileStream note_file = File.Open(tit + ".rtf", FileMode.Open);
-
-            CreationWindow s_window = new CreationWindow(tit, ref note_file);
+            FileStream note_file = notes.get_file(tit);
+            CreationWindow s_window = new CreationWindow(tit, ref note_file, ref notes);
             s_window.Owner = this;
             s_window.CreationWindowClosed += CreationWindowClosed_React;
             s_window.Show();
+
         }
 
         private void DelButton_Click(object sender, RoutedEventArgs e)
@@ -64,7 +73,7 @@ namespace Notes
             int index = NotesList.SelectedIndex;
             string tit = (string)NotesList.Items[index];
             NotesList.Items.RemoveAt(index);
-            File.Delete(tit + ".rtf");
+            notes.remove_file(tit);
         }
 
         private void Lang_SelectionChanged(object sender, SelectionChangedEventArgs e)
