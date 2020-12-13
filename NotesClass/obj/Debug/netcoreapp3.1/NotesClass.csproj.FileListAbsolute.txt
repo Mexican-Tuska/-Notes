@@ -1,0 +1,9 @@
+C:\Users\pc\Source\Repos\-Notes\NotesClass\bin\Debug\netcoreapp3.1\NotesClass.deps.json
+C:\Users\pc\Source\Repos\-Notes\NotesClass\bin\Debug\netcoreapp3.1\NotesClass.dll
+C:\Users\pc\Source\Repos\-Notes\NotesClass\bin\Debug\netcoreapp3.1\NotesClass.pdb
+C:\Users\pc\Source\Repos\-Notes\NotesClass\obj\Debug\netcoreapp3.1\NotesClass.csprojAssemblyReference.cache
+C:\Users\pc\Source\Repos\-Notes\NotesClass\obj\Debug\netcoreapp3.1\NotesClass.AssemblyInfoInputs.cache
+C:\Users\pc\Source\Repos\-Notes\NotesClass\obj\Debug\netcoreapp3.1\NotesClass.AssemblyInfo.cs
+C:\Users\pc\Source\Repos\-Notes\NotesClass\obj\Debug\netcoreapp3.1\NotesClass.csproj.CoreCompileInputs.cache
+C:\Users\pc\Source\Repos\-Notes\NotesClass\obj\Debug\netcoreapp3.1\NotesClass.dll
+C:\Users\pc\Source\Repos\-Notes\NotesClass\obj\Debug\netcoreapp3.1\NotesClass.pdb
