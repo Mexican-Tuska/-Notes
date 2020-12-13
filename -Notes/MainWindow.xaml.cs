@@ -13,7 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Globalization;
 using NotesClass;
+
 namespace Notes
 {
     /// <summary>
@@ -21,12 +23,12 @@ namespace Notes
     /// </summary>
     public partial class MainWindow : Window
     {
-      public  NotesClass.NotesClass notes;
-
+        string language;
         public MainWindow()
         {
             InitializeComponent();
-            notes = new NotesClass.NotesClass();
+            language = "rus-RU";
+             notes = new NotesClass.NotesClass();
             List<string> titles = notes.get_titles();
             foreach (string t in titles)
             {
@@ -34,27 +36,24 @@ namespace Notes
             }
 
         }
-        
-
+    
         private void CreateButton_Click(object sender, RoutedEventArgs e)
         {
             CreationWindow creationWindow = new CreationWindow(ref notes); /*Создали окошко*/
             creationWindow.Owner = this; 
             creationWindow.CreationWindowClosed += CreationWindowClosed_React; 
             creationWindow.Show();
-
         }
 
         private void CreationWindowClosed_React(object sender, EventArgs e) /*После закрытия окошка создания записки*/
         {
-            if (!NotesList.Items.Contains(((CreationWindow)sender).get_title())) /*получили заголовок*/
+           if (!NotesList.Items.Contains(((CreationWindow)sender).get_title())) /*получили заголовок*/
             { NotesList.Items.Add(((CreationWindow)sender).get_title());
                 notes = ((CreationWindow)sender).get_tmp();  } /*И добавили его в листбокс, если такие данные уже содержаться, то мы ничего не делаем*/
             else
             {
                 notes = ((CreationWindow)sender).get_tmp();
             }
-           
         }
 
         private void NotesList_ItemDoubleClick(object sender, MouseButtonEventArgs e)
@@ -66,6 +65,7 @@ namespace Notes
             s_window.Owner = this;
             s_window.CreationWindowClosed += CreationWindowClosed_React;
             s_window.Show();
+
         }
 
         private void DelButton_Click(object sender, RoutedEventArgs e)
@@ -74,6 +74,23 @@ namespace Notes
             string tit = (string)NotesList.Items[index];
             NotesList.Items.RemoveAt(index);
             notes.remove_file(tit);
+        }
+
+        private void Lang_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBox cb = sender as ComboBox;
+            language = (cb.SelectedItem as ComboBoxItem).Tag.ToString();
+
+            if (language != null)
+            {
+                CultureInfo lang = new CultureInfo(language);
+
+                if (lang != null)
+                {
+                    App.Language = lang;
+                }
+
+            }
         }
     }
 }
