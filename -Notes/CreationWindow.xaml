@@ -9,24 +9,24 @@
         Title="{DynamicResource main_Title}" Height="650" Width="350" WindowStartupLocation="CenterScreen"
         Closing="CreationWIndow_Closed">
     <Window.Background>
-        <ImageBrush ImageSource="/ruled_sheet.jpg"/>
+        <ImageBrush ImageSource="C:\Users\pc\source\repos\-Notes\-Notes\picture\ruled_sheet.jpg"/>
     </Window.Background>
     <Grid>
         <Button Name="Bold_Button" Content="B" Click="Bold_Button_Click" HorizontalAlignment="Left" Margin="16,10,0,0" Width="24" FontFamily="Segoe Print" FontWeight="Bold" Cursor="Hand" Height="25" VerticalAlignment="Top">
             <Button.Background>
-                <ImageBrush ImageSource="/stol.jpg"/>
+                <ImageBrush ImageSource="C:\Users\pc\source\repos\-Notes\-Notes\picture\stol.jpg"/>
             </Button.Background>
         </Button>
 
         <Button Name="Underlined" Content="U" Click="Underlined_Click" HorizontalAlignment="Left" Margin="75,10,0,0" VerticalAlignment="Top" Height="25" Width="25" FontFamily="Segoe Print" Cursor="Hand">
             <Button.Background>
-                <ImageBrush ImageSource="/stol.jpg"/>
+                <ImageBrush ImageSource="C:\Users\pc\source\repos\-Notes\-Notes\picture\stol.jpg"/>
             </Button.Background>
         </Button>
 
         <Button Name="Italic" Content="I" Click="Italic_Click" HorizontalAlignment="Left" Margin="45,10,0,0" VerticalAlignment="Top" Height="25" Width="25" FontFamily="Segoe Print" FontStyle="Italic" Cursor="Hand" FontSize="11">
             <Button.Background>
-                <ImageBrush ImageSource="/stol.jpg"/>
+                <ImageBrush ImageSource="C:\Users\pc\source\repos\-Notes\-Notes\picture\stol.jpg"/>
             </Button.Background>
         </Button>
 

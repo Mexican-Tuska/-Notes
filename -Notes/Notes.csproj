@@ -12,21 +12,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="ruled_sheet.jpg" />
-    <None Remove="stol.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\NotesClass\NotesClass.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="ruled_sheet.jpg" />
-    <Resource Include="stol.jpg" />
   </ItemGroup>
 
 </Project>
