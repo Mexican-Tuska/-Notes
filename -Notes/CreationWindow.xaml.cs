@@ -25,13 +25,7 @@ namespace Notes
     public partial class CreationWindow : Window
     {
         NotesClass.NotesClass n;
-        KeyValuePair<string, FileStream> note = new KeyValuePair<string, FileStream> ();
-
-        public KeyValuePair<string, FileStream> get_note ()
-        {
-            return note;
-        }
-
+             
         private bool isChanged; /*Сигнализирует изменен ли был текст в окошке*/
         private string title; /*Переменная которая возвращает заголовка записки*/
         public CreationWindow(ref NotesClass.NotesClass obj) /**/

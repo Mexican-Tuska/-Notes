@@ -23,12 +23,13 @@ namespace Notes
     /// </summary>
     public partial class MainWindow : Window
     {
+        NotesClass.NotesClass notes;
         string language;
         public MainWindow()
         {
             InitializeComponent();
             language = "rus-RU";
-             notes = new NotesClass.NotesClass();
+            notes = new NotesClass.NotesClass();
             List<string> titles = notes.get_titles();
             foreach (string t in titles)
             {
