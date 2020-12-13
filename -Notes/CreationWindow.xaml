@@ -4,14 +4,18 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Notes"
+       
         mc:Ignorable="d"
         Title="CreationWindow" Height="450" Width="800"
         Closing="CreationWIndow_Closed">
     <Grid>
         <ToolBar HorizontalAlignment="Center" Height="39" Margin="0,10,0,0" VerticalAlignment="Top" Width="780"/>
-        <Button Content="Bold" Margin="36,20,680,395"/>
-        <Button Content="Underlined" Margin="142,20,574,395"/>
-        <Button Content="Cursive" Margin="259,20,457,395"/>
+        <Button Name="Bold_Button"  Content="Bold" Margin="36,20,680,395" Click="Bold_Button_Click"/>
+       
+
+        <Button Name="Underlined" Content="Underlined" Margin="142,20,574,395" Click="Underlined_Click"/>
+        <Button Name="Italic" Content="Italic" Margin="259,20,457,395" Click="Italic_Click"/>
+        
         <RichTextBox Name="NoteEditor" Margin="10,109,10,10">
             <FlowDocument>
                 <Paragraph>
