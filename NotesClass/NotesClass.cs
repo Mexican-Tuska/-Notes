@@ -18,6 +18,14 @@ namespace NotesClass
             }
                        
         }
+        public Dictionary <string, FileStream> get_notes()
+        {
+            return notes;
+        }
+        public NotesClass(Dictionary<string, FileStream> a_notes)
+        {
+            notes = a_notes;
+        }
 
         public FileStream get_file(string title)
         {
@@ -28,11 +36,14 @@ namespace NotesClass
 
         public void remove_file(string title)
         {
-            string full_name = Directory.GetCurrentDirectory() + "\\" + title + ".rtf";
-            notes[full_name].Close();
-            File.Delete(full_name);
-            notes.Remove(full_name);
-            
+            if (File.Exists(title + ".rtf"))
+            {
+                string full_name = Directory.GetCurrentDirectory() + "\\" + title + ".rtf";
+                notes[full_name].Close();
+                File.Delete(full_name);
+                notes.Remove(full_name);
+            }
+            else throw  (new FileNotFoundException());
         }
 
         public void add_file(string title, TextRange doc)
@@ -41,6 +52,8 @@ namespace NotesClass
             doc.Save(fs, DataFormats.Rtf);
             notes.Add(Directory.GetCurrentDirectory() + "\\" + title + ".rtf", fs);
         }
+
+
         public List<string> get_titles ()
         {
             List<string> titles = new List<string> ();
